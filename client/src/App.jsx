@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import "./App.css";
 import axios from "axios";
+import Form from "./components/Form";
 
 function App() {
   const [movies, setMovies] = useState([]);
@@ -15,6 +16,17 @@ function App() {
     setMovies(res.data);
   }
 
+  async function deleteMovie(id) {
+    const check = confirm("You sure about that?");
+    if (check) {
+      const API = `http://localhost:8080/movies/${id}`;
+      await axios.delete(API);
+      getMovies();
+    } else {
+      alert("Phew, that was a close one!");
+    }
+  }
+
   return (
     <>
       <h1>Samovies</h1>
@@ -24,9 +36,11 @@ function App() {
           <div key={movie._id}>
             <h2>{movie.name}</h2>
             <img src={movie.imgUrl} />
+            <button onClick={() => deleteMovie(movie._id)}>Delete Movie</button>
           </div>
         );
       })}
+      <Form movies={movies} setMovies={setMovies} />
     </>
   );
 }
