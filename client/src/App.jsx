@@ -25,6 +25,7 @@ function App() {
       const API = `http://localhost:8080/movies/${id}`;
       await axios.delete(API);
       getMovies();
+      alert("Bye bye bye!");
     } else {
       alert("Phew, that was a close one!");
     }

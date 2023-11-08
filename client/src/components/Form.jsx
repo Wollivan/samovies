@@ -1,7 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 
-export default function Form({ movies, setMovies, movie }) {
+export default function Form({ movies, setMovies, movie, setMovie }) {
   const [formData, setFormData] = useState(
     movie ?? {
       name: "",
@@ -27,6 +27,7 @@ export default function Form({ movies, setMovies, movie }) {
     event.preventDefault();
     const API = `http://localhost:8080/movies/${movie._id}`;
     await axios.put(API, formData);
+    setMovie(formData);
   }
 
   return (

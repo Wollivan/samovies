@@ -24,7 +24,7 @@ export default function Movie() {
       <img src={movie.imgUrl} />
       <p>{movie.summary}</p>
       <p>Director: {movie.director}</p>
-      <Form movie={movie} />
+      {movie.name && <Form movie={movie} setMovie={setMovie} />}
     </div>
   );
 }
